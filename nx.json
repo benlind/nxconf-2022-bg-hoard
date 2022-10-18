@@ -10,8 +10,7 @@
           "lint",
           "test",
           "e2e",
-          "build-storybook",
-          "deploy"
+          "build-storybook"
         ],
         "accessToken": "MDJjZjY3YTMtOGQ0ZS00OTY4LWE4MWYtMmY1NTU2OGE5OGFmfHJlYWQtd3JpdGU="
       }

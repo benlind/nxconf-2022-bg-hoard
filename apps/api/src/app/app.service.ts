@@ -13,7 +13,7 @@ const games: Game[] = [
   },
   {
     id: 'chess-pie',
-    name: 'Chess Pie',
+    name: 'Chess Pile',
     image: '/assets/chess.png', // 'https://media.giphy.com/media/iCZyBnPBLr0dy/giphy.gif',
     description: 'A circular game of Chess that you can eat as you play.',
     price: 15,
