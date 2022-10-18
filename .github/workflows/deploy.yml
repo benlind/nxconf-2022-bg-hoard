@@ -11,8 +11,14 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: bahmutov/npm-install@v1
-      - run: npx nx affected --target deploy --base="main~1" --parallel --prod
+      - uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'main' # remember to set this correctly
+      - run: npx nx affected --target=build --base=${{ env.NX_BASE }} --parallel --configuration=production
+      - run: npx nx affected --target=deploy --base=${{ env.NX_BASE }} --parallel
 
 env:
   SURGE_DOMAIN_STORE: ${{ secrets.SURGE_DOMAIN_STORE }}
