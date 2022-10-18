@@ -23,7 +23,7 @@ jobs:
       - run: npx nx affected --target test --base origin/main --parallel
   e2e: # give our job an ID
     runs-on: ubuntu-latest # the image our job will run on
-    name: Test # the name that will appear on the Actions UI
+    name: E2E # the name that will appear on the Actions UI
     steps: # what steps it will perform
       - uses: actions/checkout@v3 # checkout whatever branch the PR is using
         with:
@@ -32,7 +32,7 @@ jobs:
       - run: npx nx affected --target e2e --base origin/main --parallel
   build: # give our job an ID
     runs-on: ubuntu-latest # the image our job will run on
-    name: Test # the name that will appear on the Actions UI
+    name: Build # the name that will appear on the Actions UI
     steps: # what steps it will perform
       - uses: actions/checkout@v3 # checkout whatever branch the PR is using
         with:
