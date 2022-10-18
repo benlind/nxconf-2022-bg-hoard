@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
-      - run: npx nx affected --target deploy --parallel --prod
+      - run: npx nx deploy store
+      - run: npx nx deploy api --prod
 
 env:
   SURGE_DOMAIN_STORE: ${{ secrets.SURGE_DOMAIN_STORE }}
