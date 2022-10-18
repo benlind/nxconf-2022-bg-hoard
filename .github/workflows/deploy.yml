@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
+      - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
       - run: npx nx affected --target deploy --parallel --prod
 
