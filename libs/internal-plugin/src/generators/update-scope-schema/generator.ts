@@ -6,6 +6,13 @@ import {
   getProjects,
 } from '@nrwl/devkit';
 
+export default async function (tree: Tree) {
+  const scopes = getScopes(getProjects(tree));
+  updateSchemaJson(tree, scopes);
+  updateSchemaInterface(tree, scopes);
+  await formatFiles(tree);
+}
+
 function getScopes(projectMap: Map<string, ProjectConfiguration>) {
   const projects: any[] = Array.from(projectMap.values());
   const allScopes: string[] = projects
@@ -17,8 +24,7 @@ function getScopes(projectMap: Map<string, ProjectConfiguration>) {
   return Array.from(new Set(allScopes));
 }
 
-export default async function (tree: Tree) {
-  const scopes = getScopes(getProjects(tree));
+function updateSchemaJson(tree: Tree, scopes: string[]) {
   updateJson(
     tree,
     'libs/internal-plugin/src/generators/util-lib/schema.json',
@@ -32,5 +38,15 @@ export default async function (tree: Tree) {
       return schemaJson;
     }
   );
-  await formatFiles(tree);
+}
+
+function updateSchemaInterface(tree: Tree, scopes: string[]) {
+  const joinScopes = scopes.map((s) => `'${s}'`).join(' | ');
+  const interfaceDefinitionFilePath =
+    'libs/internal-plugin/src/generators/util-lib/schema.d.ts';
+  const newContent = `export interface UtilLibGeneratorSchema {
+  name: string;
+  directory: ${joinScopes};
+}`;
+  tree.write(interfaceDefinitionFilePath, newContent);
 }
